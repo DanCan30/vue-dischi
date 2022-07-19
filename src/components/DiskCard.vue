@@ -4,6 +4,7 @@
 
         <div class="img-container">
             <img :src="poster" :alt="`${title} performed by ${author}`">
+            <span>{{ genre }}</span>
         </div>
 
         <h2>{{ title }}</h2>
@@ -33,13 +34,31 @@ export default {
 @import "../assets/stiles/variables.scss";
 
         .disk {
-            background-color: #2E3A46;
+            // background-color: rgb(46, 58, 70);
+            background-color: rgba(255, 255, 255, .1);
             width: calc((100% / 5) - 2rem);
             text-align: center;
+            cursor: pointer;
+            transition: .3s;
 
-            img {
-                width: 100%;
+            .img-container {
+                position: relative;
+                overflow: hidden;
                 padding: 2rem;
+    
+                img {
+                    width: 100%;
+                    background-color: black;
+                }
+
+                span {
+                    position: absolute;
+                    top: 50%;
+                    
+                    transform: translate(50%, -50%);
+                    font-size: 2rem;
+                    font-weight: bolder;
+                }
             }
 
             h2 {
@@ -50,10 +69,32 @@ export default {
             p {
                 color: $subTextColor;
 
+            &:last-child {
+                padding-bottom: 2rem;
             }
 
-            &:last-child {
-                padding-bottom: 7rem;
+            }
+
+            &:hover {
+                background-color: rgba(0, 0, 0, .5);
+
+                span {
+                    animation: slide .3s forwards;
+
+                    @keyframes slide {
+                        0% {
+                            right: 0;
+                        }
+
+                        100% {
+                            right: 50%;
+                        }
+                    }
+                }
+
+                img {
+                    opacity: .1;
+                }
             }
         }
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="container" v-if="disks.length === 10">
+    <div class="container" v-if="loaded === true">
 
         <DiskCard v-for="(disk, index) in disks" :key="index"
             
@@ -34,20 +34,25 @@ export default {
     data: function() {
         return {
             disks: [],
+
+            loaded: false,
         }
     },
 
     methods: {
         getDisksList: function() {
 
-
             axios.get("https://flynn.boolean.careers/exercises/api/array/music")
                 .then((response) => {
                     this.disks = response.data.response;
                     console.log(this.disks);
                 }
-
             )
+        },
+
+        loadingScreen: function() {
+            setTimeout( () => {this.loaded = true} , 1500);
+
         }
 
     },
@@ -55,6 +60,10 @@ export default {
     created() {
         this.getDisksList();
     },
+
+    mounted() {
+        this.loadingScreen();
+    }
 
 }
 </script>

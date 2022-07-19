@@ -21,7 +21,7 @@ export default {
         position: absolute;
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, .7);
+        background-color: rgba(0, 0, 0, .4);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -46,7 +46,7 @@ export default {
             height: 100%;
             background-color: #18D860;
             border-radius: 20px;
-            animation: loading 1s forwards;
+            animation: loading 1.5s forwards;
         }
 
             @keyframes loading {
