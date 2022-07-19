@@ -3,11 +3,11 @@
 
         <DiskCard v-for="(disk, index) in disks" :key="index"
             
-            :author="disk[index].author"
-            :genre="disk[index].genre"
-            :poster="disk[index].poster"
-            :title="disk[index].title"
-            :year="disk[index].year"
+            :author="disk.author"
+            :genre="disk.genre"
+            :poster="disk.poster"
+            :title="disk.title"
+            :year="disk.year"
         />
 
 
@@ -40,15 +40,14 @@ export default {
     methods: {
         getDisksList: function() {
 
-            for (let i = 0; i < 10; i++) {
 
-                axios.get("https://flynn.boolean.careers/exercises/api/array/music")
-                    .then((response) => {
-                        this.disks.push(response.data.response);
-                    }
-                )
-            }
+            axios.get("https://flynn.boolean.careers/exercises/api/array/music")
+                .then((response) => {
+                    this.disks = response.data.response;
+                    console.log(this.disks);
+                }
 
+            )
         }
 
     },
