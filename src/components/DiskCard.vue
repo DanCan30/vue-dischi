@@ -39,12 +39,12 @@ export default {
 
             img {
                 width: 100%;
-                padding: 1.4rem;
+                padding: 2rem;
             }
 
             h2 {
-                padding: 1rem;
-                font-size: 2.2rem;
+                padding: 1rem 2rem;
+                font-size: 2rem;
             }
 
             p {
