@@ -30,6 +30,6 @@ export default {
 div#app {
     font-family: 'Poppins', sans-serif;
     background-color: $bgColor;
-    color: $textColor;
+    color: $mainTextColor;
 }
 </style>
