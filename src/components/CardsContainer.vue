@@ -1,6 +1,10 @@
 <template>
     <div>
-        <Search @search="getDisksList"/>
+        <Search @search="getDisksList" 
+        v-for="(info, index) in diskInfos" :key="index"
+        :type="info.type"
+        :contents="info.content" />
+
         <div class="container" v-if="isLoaded === true">
 
 
@@ -40,30 +44,65 @@ export default {
         return {
             disks: [],
 
+            genres: [],
+
+            uniqueGenres: [],
+
+            authors: [],
+
+            diskInfos: [],
+
             isLoaded: false,
         }
     },
 
     methods: {
-        getDisksList: function(genreToFilter) {
+        getDisksList: function(elementToFilter) {
 
             axios.get("https://flynn.boolean.careers/exercises/api/array/music")
                 .then((response) => {
                     
                     this.disks = response.data.response;
 
-                    if (genreToFilter == "all") {
+                    if (elementToFilter == "all") {
                         this.disks = response.data.response;
 
                     } else {
 
-                        const filteredByGenre = this.disks.filter((disk) => disk.genre.toLowerCase() == genreToFilter.toLowerCase() );
-    
-                        this.disks = filteredByGenre;
+                        const filteredElement = this.disks.filter((disk) => disk.genre.toLowerCase() == elementToFilter.toLowerCase() || disk.author.toLowerCase() == elementToFilter.toLowerCase() );
+                        this.disks = filteredElement;
+
                     }
 
                 }
             )
+        },
+
+        getDiskInfos: function() { 
+            axios.get("https://flynn.boolean.careers/exercises/api/array/music")
+                .then((response) => {
+
+                    for (let i = 0; i < this.disks.length; i++) {
+                        this.genres.push(response.data.response[i].genre);
+                        this.authors.push(response.data.response[i].author);
+
+                    }
+                    // Remove duplicates from array
+                    this.uniqueGenres = [... new Set(this.genres)];
+
+
+                    // Add a new element at the start of the array
+                    this.uniqueGenres.unshift("all");
+                    this.authors.unshift("all");
+
+                    this.diskInfos.push({type: "genres", content: this.uniqueGenres,}, {type: "authors", content: this.authors});
+
+                    console.log(this.diskInfos);
+                }
+            )    
+
+
+
         },
 
         loadingScreen: function() {
@@ -75,6 +114,7 @@ export default {
 
     created() {
         this.getDisksList();
+        this.getDiskInfos();
     },
 
     mounted() {

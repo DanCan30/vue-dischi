@@ -1,17 +1,17 @@
 <template>
 
   <div>
-    <label for="genre-filter">Filter by genre </label>
+    <label for="genre-filter">Filter by {{ type }} </label>
   
-    <select name="genre-filter" id="genre-filter" v-model="selectedGenre" >
+    <select name="genre-filter" id="genre-filter" v-model="selectedElement" >
 
-        <option v-for="(genre, index) in genres" :key="index" :value="index">
-          {{ genre.toUpperCase() }}
+        <option v-for="(content, index) in contents" :key="index" :value="index">
+          {{ content.toUpperCase() }}
         </option>
 
     </select>
 
-      <a href="#" @click="$emit('search', genres[selectedGenre])">Search</a>
+      <a href="#" @click="$emit('search', contents[selectedElement])">Search</a>
   </div>
 
 </template>
@@ -19,11 +19,15 @@
 <script>
 export default {
 
+  props: {
+    type: String,
+    contents: Array,
+  },
+
   data: function() {
     return {
-      genres: ["all", "rock", "pop", "jazz", "metal"],
 
-      selectedGenre: "all",
+      selectedElement: "",
     }
   },
 
@@ -39,10 +43,11 @@ div {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-top: 1rem;
   
   label {
     text-transform: uppercase;
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   
   select {
