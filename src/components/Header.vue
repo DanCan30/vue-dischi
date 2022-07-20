@@ -15,8 +15,12 @@ export default {
 
 
     header {
-        background-color: $containersColor;
-        height: 6vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: $containersColor;
+      height: 6vh;
 
         img#logo {
             max-width: 3rem;

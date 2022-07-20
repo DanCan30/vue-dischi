@@ -1,21 +1,24 @@
 <template>
-    <div class="container" v-if="loaded === true">
-
-        <DiskCard v-for="(disk, index) in disks" :key="index"
-            
-            :author="disk.author"
-            :genre="disk.genre"
-            :poster="disk.poster"
-            :title="disk.title"
-            :year="disk.year"
-        />
+    <div>
+        <Search @search="getDisksList"/>
+        <div class="container" v-if="isLoaded === true">
 
 
+            <DiskCard v-for="(disk, index) in disks" :key="index" 
+                
+                :author="disk.author"
+                :genre="disk.genre"
+                :poster="disk.poster"
+                :title="disk.title"
+                :year="disk.year"
+            />
 
+
+
+        </div>
+
+        <Loader v-else />
     </div>
-
-    <Loader v-else />
-
 </template>
 
 <script>
@@ -23,37 +26,50 @@
 import axios from "axios";
 import DiskCard from "./DiskCard.vue";
 import Loader from "./Loader.vue";
+import Search from "./Search.vue";
 
 export default {
 
     components: {
         DiskCard,
         Loader,
+        Search,
     },
 
     data: function() {
         return {
             disks: [],
 
-            loaded: false,
+            isLoaded: false,
         }
     },
 
     methods: {
-        getDisksList: function() {
+        getDisksList: function(genreToFilter) {
 
             axios.get("https://flynn.boolean.careers/exercises/api/array/music")
                 .then((response) => {
+                    
                     this.disks = response.data.response;
-                    console.log(this.disks);
+
+                    if (genreToFilter == "all") {
+                        this.disks = response.data.response;
+
+                    } else {
+
+                        const filteredByGenre = this.disks.filter((disk) => disk.genre.toLowerCase() == genreToFilter.toLowerCase() );
+    
+                        this.disks = filteredByGenre;
+                    }
+
                 }
             )
         },
 
         loadingScreen: function() {
-            setTimeout( () => {this.loaded = true} , 1500);
+            setTimeout( () => {this.isLoaded = true} , 1500);
 
-        }
+        },
 
     },
 
@@ -69,8 +85,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-@import "../assets/stiles/variables.scss";
 
     div.container {
         width: 60%;

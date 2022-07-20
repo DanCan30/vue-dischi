@@ -20,7 +20,7 @@ export default {
 <style lang="scss" scoped>
 
     main {
-        height: 94vh;
-        padding: 6vh 0;
+        height: 100vh;
+        padding: 12vh 0 6vh;
     }
 </style>
