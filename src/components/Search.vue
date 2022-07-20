@@ -11,7 +11,7 @@
 
     </select>
 
-      <a href="#" @click="$emit('search', contents[selectedElement])">Search</a>
+      <a href="#" @click="$emit('search', contents[selectedElement]), selectedElement = ''">Search</a>
   </div>
 
 </template>

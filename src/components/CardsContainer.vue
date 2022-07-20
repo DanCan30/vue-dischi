@@ -64,6 +64,26 @@ export default {
                     
                     this.disks = response.data.response;
 
+
+                    for (let i = 0; i < this.disks.length; i++) {
+                        this.genres.push(response.data.response[i].genre);
+                        this.authors.push(response.data.response[i].author);
+
+                    }
+
+                    // Add a new element at the start of the array
+                    this.genres.unshift("all");
+                    this.authors.unshift("all");
+
+                    // Remove duplicates from array
+                    this.genres = [... new Set(this.genres)];
+                    this.authors = [... new Set(this.authors)];
+
+                        this.diskInfos = [{type: "genres", content: this.genres,}, {type: "authors", content: this.authors}];
+
+                    console.log(this.diskInfos);
+
+
                     if (elementToFilter == "all") {
                         this.disks = response.data.response;
 
@@ -78,32 +98,17 @@ export default {
             )
         },
 
-        getDiskInfos: function() { 
-            axios.get("https://flynn.boolean.careers/exercises/api/array/music")
-                .then((response) => {
-
-                    for (let i = 0; i < this.disks.length; i++) {
-                        this.genres.push(response.data.response[i].genre);
-                        this.authors.push(response.data.response[i].author);
-
-                    }
-                    // Remove duplicates from array
-                    this.uniqueGenres = [... new Set(this.genres)];
+        // getDiskInfos: function() { 
+        //     axios.get("https://flynn.boolean.careers/exercises/api/array/music")
+        //         .then((response) => {
 
 
-                    // Add a new element at the start of the array
-                    this.uniqueGenres.unshift("all");
-                    this.authors.unshift("all");
-
-                    this.diskInfos.push({type: "genres", content: this.uniqueGenres,}, {type: "authors", content: this.authors});
-
-                    console.log(this.diskInfos);
-                }
-            )    
+        //         }
+        //     )    
 
 
 
-        },
+        // },
 
         loadingScreen: function() {
             setTimeout( () => {this.isLoaded = true} , 1500);
@@ -114,7 +119,7 @@ export default {
 
     created() {
         this.getDisksList();
-        this.getDiskInfos();
+        // this.getDiskInfos();
     },
 
     mounted() {
