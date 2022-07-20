@@ -98,18 +98,6 @@ export default {
             )
         },
 
-        // getDiskInfos: function() { 
-        //     axios.get("https://flynn.boolean.careers/exercises/api/array/music")
-        //         .then((response) => {
-
-
-        //         }
-        //     )    
-
-
-
-        // },
-
         loadingScreen: function() {
             setTimeout( () => {this.isLoaded = true} , 1500);
 
@@ -119,7 +107,6 @@ export default {
 
     created() {
         this.getDisksList();
-        // this.getDiskInfos();
     },
 
     mounted() {

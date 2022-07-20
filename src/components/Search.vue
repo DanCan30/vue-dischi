@@ -75,6 +75,12 @@ div {
     border-radius: 30px;
     text-decoration: none;
     margin: 0 2rem;
+    transition: .2s;
+
+    &:hover {
+      color: #18D860;
+      background-color: white;
+    }
   }
 }
 </style>
