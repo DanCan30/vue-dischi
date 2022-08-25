@@ -34,7 +34,6 @@ export default {
 @import "../assets/stiles/variables.scss";
 
         .disk {
-            // background-color: rgb(46, 58, 70);
             background-color: rgba(255, 255, 255, .1);
             width: calc((100% / 5) - 2rem);
             text-align: center;

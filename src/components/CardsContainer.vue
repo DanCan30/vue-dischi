@@ -46,8 +46,6 @@ export default {
 
             genres: [],
 
-            uniqueGenres: [],
-
             authors: [],
 
             diskInfos: [],
@@ -81,10 +79,7 @@ export default {
 
                         this.diskInfos = [{type: "genres", content: this.genres,}, {type: "authors", content: this.authors}];
 
-                    console.log(this.diskInfos);
-
-
-                    if (elementToFilter == "all") {
+                    if (elementToFilter == "all" || elementToFilter == "") {
                         this.disks = response.data.response;
 
                     } else {
